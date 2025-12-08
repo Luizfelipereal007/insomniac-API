@@ -1,0 +1,33 @@
+name: Keep API Alive
+
+on:
+  schedule:
+    # Run every 10 minutes during business hours (06:00-18:00 America/Manaus = 10:00-22:00 UTC)
+    # Monday to Saturday: 1-6 (in cron, 0 is Sunday, 1 is Monday, 6 is Saturday)
+    # Note: GitHub Actions uses UTC timezone
+    - cron: '*/10 10-21 * * 1-6'  # 10:00-21:59 UTC (06:00-17:59 America/Manaus)
+    - cron: '*/10 22 * * 1-6'     # 22:00 UTC (18:00 America/Manaus)
+  workflow_dispatch:  # Allow manual triggering
+
+jobs:
+  ping-api:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Ping API to keep it alive
+      run: |
+        echo "Pinging API at $(date)"
+        response=$(curl -s -o /dev/null -w "%{http_code}" https://api-crm-b8fi.onrender.com/)
+        echo "Response code: $response"
+        
+        if [ "$response" -eq 200 ]; then
+          echo "✅ API is responding correctly (HTTP $response)"
+        else
+          echo "⚠️ API returned HTTP $response"
+          exit 1
+        fi
+        
+    - name: Log execution time
+      run: |
+        echo "Workflow executed at: $(date)"
+        echo "Timezone: UTC (equivalent to 06:00-18:00 in America/Manaus)"
