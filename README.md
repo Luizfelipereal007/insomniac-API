@@ -1,6 +1,6 @@
 # insomniac-API
 
-Este bot tem como objetivo impedir que a API entre em modo de hibernação. Ele envia requisições automáticas a cada 9 minutos, somente no período das 06:00 às 18:00 (horário comercial), garantindo que a API permaneça ativa e pronta para uso. Fora desse intervalo, o bot permanece inativo para evitar consumo desnecessário de recursos.
+Este bot tem como objetivo impedir que a API entre em modo de hibernação. Ele envia requisições automáticas a cada 5 minutos, somente no período das 06:00 às 18:00 (horário comercial), garantindo que a API permaneça ativa e pronta para uso. Fora desse intervalo, o bot permanece inativo para evitar consumo desnecessário de recursos.
 
 ## Como Funciona
 
@@ -8,11 +8,11 @@ O projeto utiliza **GitHub Actions** para automatizar o processo de ping na API.
 
 - **Dias**: Segunda a Sábado
 - **Horário**: 06:00 às 18:00 (America/Manaus)
-- **Frequência**: A cada 9 minutos
+- **Frequência**: A cada 5 minutos
 
 ## Funcionalidades
 
-- ✅ Ping automático na API a cada 9 minutos
+- ✅ Ping automático na API a cada 5 minutos
 - ✅ Funciona apenas em horário comercial (06:00-18:00)
 - ✅ Desativa automaticamente fora do horário de trabalho
 - ✅ Monitoramento de resposta HTTP
